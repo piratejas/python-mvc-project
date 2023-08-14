@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <tender>Bids API</tender>
+  </head>
+  <body>
+    <h1>Bids</h1>
+    <ul>
+      {% for bid in bids %}
+        <li>{{ bid.tender }} by {{ bid.client }}</li>
+      {% endfor %}
+    </ul>
+    <h2>Add a Bid</h2>
+    <form action="/add_bid" method="post">
+      <label for="tender">Tender:</label>
+      <input type="text" name="tender" id="tender" required><br>
+      <label for="client">Client:</label>
+      <input type="text" name="client" id="client" required><br>
+      <label for="bid_date">Bid Date:</label>
+      <input type="text" name="bid_date" id="bid_date" required><br>
+      <label for="alias">Alias:</label>
+      <input type="text" name="alias" id="alias"><br>
+      <label for="bid_folder_url">Bid Folder URL:</label>
+      <input type="text" name="bid_folder_url" id="bid_folder_url"><br>
+      <label for="was_successful">Was Successful:</label>
+      <input type="text" name="was_successful" id="was_successful"><br>
+      <input type="submit" value="Add Bid">
+    </form>
+  </body>
+</html>
