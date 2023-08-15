@@ -32,19 +32,17 @@
 
     <div class="pagination">
         <form action="/" method="get">
-            <input type="hidden" name="offset" value="{{ next_offset }}">
+            <input type="hidden" name="offset" value="{{ offset + limit }}">
             <input type="hidden" name="limit" value="{{ limit }}">
             {% if bids|length == limit %}
             <input type="submit" value="Next">
             {% endif %}
         </form>
-        {% if offset > 0 %}
-        <span>Page {{ (offset // limit) + 1 }}</span>
-        {% else %}
-        <span>Page 1</span>
-        {% endif %}
+
+        <span>Page {% if offset > 0 %}{{ (offset // limit) + 1 }}{% else %}1{% endif %}</span>
+  
         <form action="/" method="get">
-            <input type="hidden" name="offset" value="{{ last_offset }}">
+            <input type="hidden" name="offset" value="{{ offset - limit }}">
             <input type="hidden" name="limit" value="{{ limit }}">
             {% if offset and offset > 0 %}
             <input type="submit" value="Previous">
