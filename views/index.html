@@ -8,7 +8,9 @@
     <table>
         <thead>
             <tr>
-              <form action="/" method="get">
+              <form action="/" method="post">
+                <input type="hidden" name="offset" value="{{ offset }}">
+                <input type="hidden" name="limit" value="{{ limit }}">
                 <th>ID</th>
                 <th>Tender<br/><button type="submit" class="sort-button" name="sort" value="tender">⬇️</button><button type="submit" class="sort-button" name="sort" value="-tender">⬆️</button></th>
                 <th>Bid Date<br/><button type="submit" class="sort-button" name="sort" value="bid_date">⬇️</button><button type="submit" class="sort-button" name="sort" value="-bid_date">⬆️</button></th>
@@ -42,6 +44,7 @@
         <form action="/" method="get">
             <input type="hidden" name="offset" value="{{ offset + limit }}">
             <input type="hidden" name="limit" value="{{ limit }}">
+            <input type="hidden" name="sort" value="{{ sort }}">
             {% if bids|length == limit %}
             <input type="submit" value="Next">
             {% endif %}
@@ -52,6 +55,7 @@
         <form action="/" method="get">
             <input type="hidden" name="offset" value="{{ offset - limit }}">
             <input type="hidden" name="limit" value="{{ limit }}">
+            <input type="hidden" name="sort" value="{{ sort }}">
             {% if offset and offset > 0 %}
             <input type="submit" value="Previous">
             {% endif %}
@@ -59,6 +63,7 @@
     </div>
 
     <form action="/" method="post">
+        <input type="hidden" name="sort" value="{{ sort }}">
         <label for="limit">No. of results per page: </label>
         <input type="number" name="limit" id="limit"/><br />
         <input type="submit" value="Submit" />
