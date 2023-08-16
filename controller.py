@@ -8,12 +8,12 @@ main = Blueprint("main", __name__)
 @main.route('/', methods=["GET", "POST"])
 def index():
     headers = {"Content-Type": "application/json", "X-API-Key": "THIS_IS_THE_API_KEY"}
-    sort = "" if not request.args.get("sort") else request.args.get("sort")
+    sort = request.args.get("sort", "")
     offset = int(request.args.get("offset", 0))
     limit = int(request.args.get("limit", 5))
     if request.method == "POST":
-        limit = 5 if not request.form.get("limit") else int(request.form["limit"])
-        sort = sort if not request.form["sort"] else request.form["sort"]
+        limit = int(request.form.get("limit", limit))
+        sort = request.form.get("sort", sort)
     url = f"http://localhost:8080/api/bids?sort={sort}&offset={offset}&limit={limit}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
