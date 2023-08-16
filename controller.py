@@ -20,7 +20,9 @@ def index():
         bids = response.json()["items"]
         return render_template('index.html', bids=bids, limit=limit, offset=offset, sort=sort)
     else:
-        return render_template('error.html', error=response.json(), status=response.status_code)
+        message = response.json()["Error"]
+        status=response.status_code
+        return render_template('error.html', message=message, status=status)
         
 
 # # Controller
