@@ -9,15 +9,15 @@
         <thead>
             <tr>
               <form action="/" method="get">
-                <th><button type="submit" class="sort-button" name="sort" value="_id">ID</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="tender">Tender</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="bid_date">Bid Date</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="client">Client</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="alias">Alias</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="was_successful">Was Successful</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="bid_folder_url">Bid Folder URL</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="status">Status</button></th>
-                <th><button type="submit" class="sort-button" name="sort" value="last_updated">Last Updated</button></th>
+                <th>ID</th>
+                <th>Tender<br/><button type="submit" class="sort-button" name="sort" value="tender">⬇️</button><button type="submit" class="sort-button" name="sort" value="-tender">⬆️</button></th>
+                <th>Bid Date<br/><button type="submit" class="sort-button" name="sort" value="bid_date">⬇️</button><button type="submit" class="sort-button" name="sort" value="-bid_date">⬆️</button></th>
+                <th>Client<br/><button type="submit" class="sort-button" name="sort" value="client">⬇️</button><button type="submit" class="sort-button" name="sort" value="-client">⬆️</button></th>
+                <th>Alias<br/><button type="submit" class="sort-button" name="sort" value="alias">⬇️</button><button type="submit" class="sort-button" name="sort" value="-alias">⬆️</button></th>
+                <th>Was Successful<br/><button type="submit" class="sort-button" name="sort" value="was_successful">⬇️</button><button type="submit" class="sort-button" name="sort" value="-was_successful">⬆️</button></th>
+                <th>Bid Folder URL</th>
+                <th>Status<br/><button type="submit" class="sort-button" name="sort" value="status">⬇️</button><button type="submit" class="sort-button" name="sort" value="-status">⬆️</button></th>
+                <th>Last Updated<br/><button type="submit" class="sort-button" name="sort" value="last_updated">⬇️</button><button type="submit" class="sort-button" name="sort" value="-last_updated">⬆️</button></th>
               </form>
             </tr>
           </thead>
@@ -58,10 +58,7 @@
         </form>
     </div>
 
-    <h2>Sort results</h2>
     <form action="/" method="post">
-        <label for="sort">Sort by: </label>
-        <input type="text" name="sort" id="sort"/><br />
         <label for="limit">No. of results per page: </label>
         <input type="number" name="limit" id="limit"/><br />
         <input type="submit" value="Submit" />

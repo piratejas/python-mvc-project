@@ -11,7 +11,7 @@ def index():
     sort = request.args.get("sort", "")
     
     offset = int(request.args.get("offset", 0))
-    limit = int(request.args.get("limit", 0))
+    limit = int(request.args.get("limit", 5))
     if request.method == "POST":
         limit = 5 if not request.form.get("limit") else int(request.form["limit"])
     url = f"http://localhost:8080/api/bids?sort={sort}&offset={offset}&limit={limit}"
