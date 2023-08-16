@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <tender>Bids API</tender>
+    <title>Bids API</title>
   </head>
   <body>
-    <h1>Bids</h1>
+    <h1><a href="/">Bids</a></h1>
     <table>
         <thead>
             <tr>
@@ -63,9 +63,9 @@
     </div>
 
     <form action="/" method="post">
-        <input type="hidden" name="sort" value="{{ sort }}">
         <label for="limit">No. of results per page: </label>
-        <input type="number" name="limit" id="limit"/><br />
+        <input type="number" name="limit" id="limit" value="{{ limit }}"/><br />
+        <input type="hidden" name="sort" value="{{ sort }}">
         <input type="submit" value="Submit" />
     </form>
     <!-- <h2>Add a Bid</h2>

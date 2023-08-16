@@ -12,7 +12,7 @@ def index():
     offset = int(request.args.get("offset", 0))
     limit = int(request.args.get("limit", 5))
     if request.method == "POST":
-        limit = int(request.form.get("limit", limit))
+        limit = limit if not request.form.get("limit") else int(request.form.get("limit"))
         sort = request.form.get("sort", sort)
     url = f"http://localhost:8080/api/bids?sort={sort}&offset={offset}&limit={limit}"
     response = requests.get(url, headers=headers)
