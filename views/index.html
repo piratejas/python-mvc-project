@@ -7,67 +7,187 @@
     <h1><a href="/">Bids</a></h1>
     <span>Total bids: {{total}}</span>
     <table>
-        <thead>
-            <tr>
-              <form action="/" method="post">
-                <input type="hidden" name="offset" value="{{ offset }}">
-                <input type="hidden" name="limit" value="{{ limit }}">
-                <th>ID</th>
-                <th>Tender<br/><button type="submit" class="sort-button" name="sort" value="tender">⬇️</button><button type="submit" class="sort-button" name="sort" value="-tender">⬆️</button></th>
-                <th>Bid Date<br/><button type="submit" class="sort-button" name="sort" value="bid_date">⬇️</button><button type="submit" class="sort-button" name="sort" value="-bid_date">⬆️</button></th>
-                <th>Client<br/><button type="submit" class="sort-button" name="sort" value="client">⬇️</button><button type="submit" class="sort-button" name="sort" value="-client">⬆️</button></th>
-                <th>Alias<br/><button type="submit" class="sort-button" name="sort" value="alias">⬇️</button><button type="submit" class="sort-button" name="sort" value="-alias">⬆️</button></th>
-                <th>Was Successful<br/><button type="submit" class="sort-button" name="sort" value="was_successful">⬇️</button><button type="submit" class="sort-button" name="sort" value="-was_successful">⬆️</button></th>
-                <th>Bid Folder URL</th>
-                <th>Status<br/><button type="submit" class="sort-button" name="sort" value="status">⬇️</button><button type="submit" class="sort-button" name="sort" value="-status">⬆️</button></th>
-                <th>Last Updated<br/><button type="submit" class="sort-button" name="sort" value="last_updated">⬇️</button><button type="submit" class="sort-button" name="sort" value="-last_updated">⬆️</button></th>
-              </form>
-            </tr>
-          </thead>
+      <thead>
+        <tr>
+          <form action="/" method="post">
+            <input type="hidden" name="offset" value="{{ offset }}" />
+            <input type="hidden" name="limit" value="{{ limit }}" />
+            <th>ID</th>
+            <th>
+              Tender<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="tender"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-tender"
+              >
+                ⬆️
+              </button>
+            </th>
+            <th>
+              Bid Date<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="bid_date"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-bid_date"
+              >
+                ⬆️
+              </button>
+            </th>
+            <th>
+              Client<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="client"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-client"
+              >
+                ⬆️
+              </button>
+            </th>
+            <th>
+              Alias<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="alias"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-alias"
+              >
+                ⬆️
+              </button>
+            </th>
+            <th>
+              Was Successful<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="was_successful"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-was_successful"
+              >
+                ⬆️
+              </button>
+            </th>
+            <th>Bid Folder URL</th>
+            <th>
+              Status<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="status"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-status"
+              >
+                ⬆️
+              </button>
+            </th>
+            <th>
+              Last Updated<br /><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="last_updated"
+              >
+                ⬇️</button
+              ><button
+                type="submit"
+                class="sort-button"
+                name="sort"
+                value="-last_updated"
+              >
+                ⬆️
+              </button>
+            </th>
+          </form>
+        </tr>
+      </thead>
       <tbody>
         {% for bid in bids %}
         <tr>
-            <td>{{ bid._id }}</td>
-            <td>{{ bid.tender }}</td>
-            <td>{{ bid.bid_date }}</td>
-            <td>{{ bid.client }}</td>
-            <td>{{ bid.alias }}</td>
-            <td>{{ bid.was_successful }}</td>
-            <td>{{ bid.bid_folder_url }}</td>
-            <td>{{ bid.status }}</td>
-            <td>{{ bid.last_updated }}</td>
+          <td>{{ bid._id }}</td>
+          <td>{{ bid.tender }}</td>
+          <td>{{ bid.bid_date }}</td>
+          <td>{{ bid.client }}</td>
+          <td>{{ bid.alias }}</td>
+          <td>{{ bid.was_successful }}</td>
+          <td>{{ bid.bid_folder_url }}</td>
+          <td>{{ bid.status }}</td>
+          <td>{{ bid.last_updated }}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
 
     <div class="pagination">
-        <form action="/" method="get">
-            <input type="hidden" name="offset" value="{{ offset + limit }}">
-            <input type="hidden" name="limit" value="{{ limit }}">
-            <input type="hidden" name="sort" value="{{ sort }}">
-            {% if bids|length == limit %}
-            <input type="submit" value="Next">
-            {% endif %}
-        </form>
+      <form action="/" method="get">
+        <input type="hidden" name="offset" value="{{ offset + limit }}" />
+        <input type="hidden" name="limit" value="{{ limit }}" />
+        <input type="hidden" name="sort" value="{{ sort }}" />
+        {% if bids|length == limit %}
+        <input type="submit" value="Next" />
+        {% endif %}
+      </form>
 
-        <span>Page {% if offset > 0 %}{{ (offset // limit) + 1 }}{% else %}1{% endif %}</span>
-  
-        <form action="/" method="get">
-            <input type="hidden" name="offset" value="{{ offset - limit }}">
-            <input type="hidden" name="limit" value="{{ limit }}">
-            <input type="hidden" name="sort" value="{{ sort }}">
-            {% if offset and offset > 0 %}
-            <input type="submit" value="Previous">
-            {% endif %}
-        </form>
+      <span>
+        Showing {{ offset + 1 }}-
+        {% if offset + limit > total %}
+          {{ total }}
+        {% else %}
+          {{ offset + limit }}
+        {% endif %}
+        of {{ total }} results
+      </span>
+
+      <form action="/" method="get">
+        <input type="hidden" name="offset" value="{{ offset - limit }}" />
+        <input type="hidden" name="limit" value="{{ limit }}" />
+        <input type="hidden" name="sort" value="{{ sort }}" />
+        {% if offset and offset > 0 %}
+        <input type="submit" value="Previous" />
+        {% endif %}
+      </form>
     </div>
 
     <form action="/" method="post">
-        <input type="hidden" name="sort" value="{{ sort }}">
-        <label for="limit">No. of results per page: </label>
-        <input type="number" name="limit" id="limit" value="{{ limit }}"/>
-        <input type="submit" value="Submit" />
+      <input type="hidden" name="sort" value="{{ sort }}" />
+      <label for="limit">No. of results per page: </label>
+      <input type="number" name="limit" id="limit" value="{{ limit }}" />
+      <input type="submit" value="Submit" />
     </form>
 
     <h2>Add a Bid</h2>
@@ -76,13 +196,28 @@
       <input type="text" name="tender" id="tender" required /><br />
       <fieldset>
         <legend>Bid Date</legend>
-          <label for="day">Day:</label>
-          <input type="number" name="day" id="day" min="1" max="31" required />
-          <label for="month">Month:</label>
-          <input type="number" name="month" id="month" min="1" max="12" required />
-          <label for="year">Year:</label>
-          <input type="number" name="year" id="year" min="1900" max="2099" required />
-      </fieldset><br />
+        <label for="day">Day:</label>
+        <input type="number" name="day" id="day" min="1" max="31" required />
+        <label for="month">Month:</label>
+        <input
+          type="number"
+          name="month"
+          id="month"
+          min="1"
+          max="12"
+          required
+        />
+        <label for="year">Year:</label>
+        <input
+          type="number"
+          name="year"
+          id="year"
+          min="1900"
+          max="2099"
+          required
+        />
+      </fieldset>
+      <br />
       <label for="client">Client:</label>
       <input type="text" name="client" id="client" required /><br />
       <label for="alias">Alias:</label>

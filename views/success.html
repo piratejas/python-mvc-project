@@ -4,10 +4,12 @@
     <title>Success</title>
   </head>
   <body>
-    <img src="https://http.dog/{{status}}.jpg" width="25%">
+    <img src="https://http.dog/{{status}}.jpg" width="25%" />
+    <h2>New bid created with ID:</h2>
+    <p>{{ bid._id }}</p>
+    <h3>Bid Information</h3>
     <p>Tender: {{ bid.tender }}</p>
     <p>Client: {{ bid.client }}</p>
     <p>Bid Date: {{ bid.bid_date }}</p>
-    <p>ID: {{ bid._id }}</p>
   </body>
 </html>
