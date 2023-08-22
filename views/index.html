@@ -99,6 +99,7 @@
               </button>
             </th>
             <th>Bid Folder URL</th>
+            <th>Feedback</th>
             <th>
               Status<br /><button
                 type="submit"
@@ -146,6 +147,12 @@
           <td>{{ bid.alias }}</td>
           <td>{{ bid.was_successful }}</td>
           <td>{{ bid.bid_folder_url }}</td>
+          <td>
+            <div>
+              <div>Description: {{ bid.feedback.description }}</div>
+              <div>URL: {{ bid.feedback.url }}</div>
+            </div>
+          </td>
           <td>{{ bid.status }}</td>
           <td>{{ bid.last_updated }}</td>
         </tr>
@@ -164,7 +171,7 @@
       </form>
 
       <span>
-        Showing {{ offset + 1 }}-
+        Showing {{ offset + 1 }} -
         {% if offset + limit > total %}
           {{ total }}
         {% else %}
@@ -226,6 +233,14 @@
       <input type="text" name="bid_folder_url" id="bid_folder_url" /><br />
       <label for="was_successful">Was Successful:</label>
       <input type="text" name="was_successful" id="was_successful" /><br />
+      <fieldset>
+        <legend>Feedback</legend>
+        <label for="feedback_description">Description:</label>
+        <input type="text" name="feedback_description" id="feedback_description">
+        <label for="feedback_url">URL:</label>
+        <input type="text" name="feedback_url" id="feedback_url">
+      </fieldset>
+      <br />
       <input type="submit" value="Add Bid" />
     </form>
   </body>
