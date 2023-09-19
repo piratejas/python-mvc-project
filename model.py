@@ -3,7 +3,7 @@ from flask import request
 
 class Bid:
 
-    def __init__(self,tender, bid_date, client, alias=None, bid_folder_url=None, was_successful=None, feedback=None):
+    def __init__(self, tender, bid_date, client, alias=None, bid_folder_url=None, was_successful=None, feedback=None):
         self.tender = tender
         self.bid_date = bid_date
         self.client = client

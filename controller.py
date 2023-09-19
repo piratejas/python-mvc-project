@@ -26,7 +26,6 @@ def index():
     
 
 
-# Controller
 # @main.route("/add_bid", methods=["POST"])
 # def add_bid():
 #     data = Bid(
