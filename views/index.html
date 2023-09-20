@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Bids API</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
   </head>
   <body>
     <h1><a href="/">Bids</a></h1>
@@ -98,8 +102,6 @@
                 ⬆️
               </button>
             </th>
-            <th>Bid Folder URL</th>
-            <th>Feedback</th>
             <th>
               Status<br /><button
                 type="submit"
@@ -134,6 +136,7 @@
                 ⬆️
               </button>
             </th>
+            <th>Bid Folder URL</th>
           </form>
         </tr>
       </thead>
@@ -146,48 +149,40 @@
           <td>{{ bid.client }}</td>
           <td>{{ bid.alias }}</td>
           <td>{{ bid.was_successful }}</td>
-          <td>{{ bid.bid_folder_url }}</td>
-          <td>
-            <div>
-              <div>Description: {{ bid.feedback.description }}</div>
-              <div>URL: {{ bid.feedback.url }}</div>
-            </div>
-          </td>
           <td>{{ bid.status }}</td>
           <td>{{ bid.last_updated }}</td>
+          <td>{{ bid.bid_folder_url }}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
 
     <div class="pagination">
-      <form action="/" method="get">
-        <input type="hidden" name="offset" value="{{ offset + limit }}" />
-        <input type="hidden" name="limit" value="{{ limit }}" />
-        <input type="hidden" name="sort" value="{{ sort }}" />
-        {% if bids|length == limit %}
-        <input type="submit" value="Next" />
-        {% endif %}
-      </form>
-
-      <span>
-        Showing {{ offset + 1 }} -
-        {% if offset + limit > total %}
-          {{ total }}
-        {% else %}
-          {{ offset + limit }}
-        {% endif %}
-        of {{ total }} results
-      </span>
-
-      <form action="/" method="get">
-        <input type="hidden" name="offset" value="{{ offset - limit }}" />
-        <input type="hidden" name="limit" value="{{ limit }}" />
-        <input type="hidden" name="sort" value="{{ sort }}" />
-        {% if offset and offset > 0 %}
-        <input type="submit" value="Previous" />
-        {% endif %}
-      </form>
+      <div class="pagination-info">
+        <span>
+          Showing {{ offset + 1 }} - {% set upper_limit = offset + limit if
+          offset + limit <= total else total %} {{ upper_limit }} of {{ total }}
+          results
+        </span>
+      </div>
+      <div class="pagination-buttons">
+        <form action="/" method="get">
+          <input type="hidden" name="offset" value="{{ offset + limit }}" />
+          <input type="hidden" name="limit" value="{{ limit }}" />
+          <input type="hidden" name="sort" value="{{ sort }}" />
+          {% if offset + limit < total %}
+          <input type="submit" value="Next" />
+          {% endif %}
+        </form>
+        <form action="/" method="get">
+          <input type="hidden" name="offset" value="{{ offset - limit }}" />
+          <input type="hidden" name="limit" value="{{ limit }}" />
+          <input type="hidden" name="sort" value="{{ sort }}" />
+          {% if offset > 0 %}
+          <input type="submit" value="Previous" />
+          {% endif %}
+        </form>
+      </div>
     </div>
 
     <form action="/" method="post">
@@ -197,51 +192,50 @@
       <input type="submit" value="Submit" />
     </form>
 
-    <!-- <h2>Add a Bid</h2>
-    <form action="/add_bid" method="post">
-      <label for="tender">Tender:</label>
-      <input type="text" name="tender" id="tender" required /><br />
-      <fieldset>
-        <legend>Bid Date</legend>
-        <label for="day">Day:</label>
-        <input type="number" name="day" id="day" min="1" max="31" required />
-        <label for="month">Month:</label>
+    <div class="add-bid-container">
+      <h2>Add a Bid</h2>
+      <form class="add-bid-form" action="/add_bid" method="post">
+        <label for="tender">Tender:</label>
+        <input type="text" name="tender" id="tender" required /><br />
+        <label for="client">Client:</label>
+        <input type="text" name="client" id="client" required /><br />
+        <fieldset>
+          <legend>Bid Date</legend>
+          <label for="day">Day:</label>
+          <input type="number" name="day" id="day" min="1" max="31" required />
+          <label for="month">Month:</label>
+          <input
+            type="number"
+            name="month"
+            id="month"
+            min="1"
+            max="12"
+            required
+          />
+          <label for="year">Year:</label>
+          <input
+            type="number"
+            name="year"
+            id="year"
+            min="1900"
+            max="2099"
+            required
+          />
+        </fieldset>
+        <br />
+        <label for="alias">Alias:</label>
+        <input type="text" name="alias" id="alias" /><br />
+        <label for="bid_folder_url">Bid Folder URL:</label>
+        <input type="text" name="bid_folder_url" id="bid_folder_url" /><br />
+        <label for="was_successful">Was Successful:</label>
         <input
-          type="number"
-          name="month"
-          id="month"
-          min="1"
-          max="12"
-          required
+          type="checkbox"
+          name="was_successful"
+          id="was_successful"
         />
-        <label for="year">Year:</label>
-        <input
-          type="number"
-          name="year"
-          id="year"
-          min="1900"
-          max="2099"
-          required
-        />
-      </fieldset>
-      <br />
-      <label for="client">Client:</label>
-      <input type="text" name="client" id="client" required /><br />
-      <label for="alias">Alias:</label>
-      <input type="text" name="alias" id="alias" /><br />
-      <label for="bid_folder_url">Bid Folder URL:</label>
-      <input type="text" name="bid_folder_url" id="bid_folder_url" /><br />
-      <label for="was_successful">Was Successful:</label>
-      <input type="text" name="was_successful" id="was_successful" /><br />
-      <fieldset>
-        <legend>Feedback</legend>
-        <label for="feedback_description">Description:</label>
-        <input type="text" name="feedback_description" id="feedback_description">
-        <label for="feedback_url">URL:</label>
-        <input type="text" name="feedback_url" id="feedback_url">
-      </fieldset>
-      <br />
-      <input type="submit" value="Add Bid" />
-    </form> -->
+        <br />
+        <input type="submit" value="Add Bid" />
+      </form>
+    </div>
   </body>
 </html>

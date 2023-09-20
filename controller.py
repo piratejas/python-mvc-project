@@ -29,28 +29,20 @@ def index():
     
 
 
-# @main.route("/add_bid", methods=["POST"])
-# def add_bid():
-#     data = Bid(
-#         tender=request.form["tender"],
-#         bid_date=f'{request.form["year"]}-{request.form["month"]}-{request.form["day"]}',
-#         client=request.form["client"],
-#         alias=request.form["alias"],
-#         bid_folder_url=request.form["bid_folder_url"],
-#         was_successful=request.form["was_successful"],
-#         feedback = {"description": request.form["feedback_description"], "url": request.form["feedback_url"]}
-#     )
-#     url = "http://localhost:8080/api/bids"
-#     headers = {
-#         "Content-Type": "application/json",
-#         "Authorization": f'Bearer {os.getenv("TOKEN")}',
-#     }
-#     response = requests.post(url, headers=headers, data=json.dumps(data.__dict__))
-#     if response.status_code == 201:
-#         status = response.status_code
-#         bid = response.json()
-#         return render_template("success.html", bid=bid, status=status)
-#     else:
-#         message = response.json()["Error"]
-#         status = response.status_code
-#         return render_template("error.html", message=message, status=status)
+@main.route("/add_bid", methods=["POST"])
+def add_bid():
+    form_data = request.form.to_dict()
+    fields_with_none = ["alias", "bid_folder_url"]
+    for field in fields_with_none:
+        if field in form_data and form_data[field] == "":
+            form_data[field] = None
+    form_data["was_successful"] = "was_successful" in form_data
+    response = Bid.add_bid(form_data)
+    if response.status_code == 201:
+        status = response.status_code
+        bid = response.json()
+        return render_template("success.html", bid=bid, status=status)
+    else:
+        message = response.json()["Error"]
+        status = response.status_code
+        return render_template("error.html", message=message, status=status)
