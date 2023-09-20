@@ -10,6 +10,9 @@ def index():
     sort = request.args.get("sort", "")
     offset = int(request.args.get("offset", 0))
     limit = int(request.args.get("limit", 5))
+    if request.method == "POST":
+            limit = int(request.form.get("limit", limit))
+            sort = request.form.get("sort", sort)
 
     response = Bid.get_all(sort=sort, offset=offset, limit=limit)
     

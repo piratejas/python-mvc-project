@@ -1,5 +1,4 @@
 import os, requests
-from flask import request
 
 class Bid:
 
@@ -15,10 +14,6 @@ class Bid:
     @classmethod
     def get_all(cls, sort, offset, limit):
         headers = {"Content-Type": "application/json", "X-API-Key": os.getenv("API_KEY")}
-        if request.method == "POST":
-            limit = int(request.form.get("limit", limit))
-            sort = request.form.get("sort", sort)
         url = f"http://localhost:8080/api/bids?sort={sort}&offset={offset}&limit={limit}"
         response = requests.get(url, headers=headers)
-
         return response
