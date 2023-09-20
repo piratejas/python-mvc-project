@@ -32,9 +32,8 @@ def index():
 @main.route("/add_bid", methods=["POST"])
 def add_bid():
     form_data = request.form.to_dict()
-    fields_with_none = ["alias", "bid_folder_url"]
-    for field in fields_with_none:
-        if field in form_data and form_data[field] == "":
+    for field in form_data:
+        if form_data[field] == "":
             form_data[field] = None
     form_data["was_successful"] = "was_successful" in form_data
     response = Bid.add_bid(form_data)
